@@ -45,7 +45,7 @@ int main()
   for(size_t it=0; it<X.size(); it++) {
     p = X.at(it);
     tp = t.transform(p);
-    cout<<"p="<<p<<" and tp"<<tp<<endl;
+    cout<<"p="<<p<<" and tp="<<tp<<endl;
   }
   return 1;
 }
