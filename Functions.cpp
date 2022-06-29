@@ -58,27 +58,6 @@ std::vector<size_t> sort_indexes(const std::vector<T> &v) {
   return idx;
 }
 
-// To find orientation of ordered triplet (p, q, r).
-// The function returns following values
-// 0 --> p, q and r are colinear
-// 1 --> Clockwise
-// 2 --> Counterclockwise
-// See https://www.geeksforgeeks.org/orientation-3-ordered-points/
-int orientation(RationalPoint p, RationalPoint q, RationalPoint r)
-{
-    Rational v1 = (q.second - p.second);
-    Rational v2 = (r.first - q.first);
-    Rational v3 = (q.first - p.first);
-    Rational v4 = (r.second - q.second);
-    Rational val = v1 * v2 - v3 * v4;
-    //Rational val = (q.second - p.second) * (r.first - q.first) - (q.first - p.first) * (r.second - q.second);
-  
-    if (val == Rational(0))
-        return 0;  // colinear
-  
-    return (val > 0)? 1: 2; // clock or counterclock wise
-}
-
 bool isAllTrue(std::vector<bool> vec)
 {
     for(int it=0; it<vec.size(); it++)
@@ -151,29 +130,7 @@ bool containElement(const std::vector<Z2i::Point>& vector, Z2i::Point element)
         return true;
     return false;
 }
-/*
-// Function that returns true if it is possible
-// to form a polygon with the given sides
-bool isConvex(std::vector<double> a)
-{
-    int n = a.size();
-    // Sum stores the sum of all the sides
-    // and maxS stores the length of
-    // the largest side
-    double sum = 0, maxS = 0;
-    for (int i = 0; i < n; i++) {
-        sum += a[i];
-        maxS = std::max(a[i], maxS);
-    }
-  
-    // If the length of the largest side
-    // is less than the sum of the
-    // other remaining sides
-    if ((sum - maxS) > maxS)
-        return true;
-    return false;
-}
-*/
+
 bool isEqual(RationalPoint p1, RationalPoint p2)
 {
     return p1.first==p2.first && p1.second==p2.second;
@@ -300,41 +257,7 @@ double CrossProductLength(double Ax, double Ay, double Bx, double By, double Cx,
     // Calculate the Z coordinate of the cross product.
     return (BAx * BCy - BAy * BCx);
 }
-/*
-bool isConvex(std::vector<RationalPoint> points)
-{
-    // For each set of three adjacent points A, B, C,
-    // find the cross product AB · BC. If the sign of
-    // all the cross products is the same, the angles
-    // are all positive or negative (depending on the
-    // order in which we visit them) so the polygon
-    // is convex.
-    bool got_negative = false;
-    bool got_positive = false;
-    int num_points = points.size();
-    int B, C;
-    for (int A = 0; A < num_points; A++)
-    {
-        B = (A + 1) % num_points;
-        C = (B + 1) % num_points;
-        double Ax = getRealValue(points.at(A).first);
-        double Ay = getRealValue(points.at(A).second);
-        double Bx = getRealValue(points.at(B).first);
-        double By = getRealValue(points.at(B).second);
-        double Cx = getRealValue(points.at(C).first);
-        double Cy = getRealValue(points.at(C).second);
-        double cross_product = CrossProductLength(Ax,Ay,Bx,By,Cx,Cy);
-        if (cross_product < 0)
-            got_negative = true;
-        else if (cross_product > 0)
-            got_positive = true;
-        if (got_negative && got_positive)
-            return false;
-    }
-    // If we got this far, the polygon is convex.
-    return true;
-}
-*/
+
 //Find the smallest positive integer V such that [XV] + 1 < YV
 //Return V or -1 if V is not exist
 int findSmallestValue(double X, double Y)
@@ -427,6 +350,6 @@ void writePoints(std::vector<Z2i::Point> pts, std::string filename)
 
 std::ostream& operator<<(std::ostream& os, const RationalPoint p)
 {
-    os<<"("<<p.first<<","<<p.second<<")";
+    os<<"[RationalPointVector] {"<<p.first<<", "<<p.second<<"}";
     return os;
 }
