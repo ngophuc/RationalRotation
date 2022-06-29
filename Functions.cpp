@@ -350,6 +350,6 @@ void writePoints(std::vector<Z2i::Point> pts, std::string filename)
 
 std::ostream& operator<<(std::ostream& os, const RationalPoint p)
 {
-    os<<"[RationalPointVector] {"<<p.first<<", "<<p.second<<"}";
+    os<<"[RationalPoint] {"<<p.first<<", "<<p.second<<"}";
     return os;
 }
