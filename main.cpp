@@ -30,15 +30,42 @@ std::vector<Z2i::Point> readImage(string filename)
   return vecPts;
 }
 
-int main()
-{
-  std::vector<Z2i::Point> X = readImage("../ball_r5.pgm");
+int main(int argc, const char **argv) {
+  printf("Running command: <input_image> [[a b] c]\n");
+  int a=3, b=4, c=5, d;
+  string image_name = "../ball_r5.pgm";
+  if(argc>1)
+    image_name = argv[1];
+  if(argc==4) { //Rotation2D a b
+    a = atoi(argv[2]);//a
+    b = atoi(argv[3]);//b
+    d = (a*a+b*b);
+    c = int(sqrt(d));
+    if(c*c!=d) {
+      perror("Invalide parameter!");
+      exit(0);
+    }
+  }
+  if(argc==5) { //Rotation2D a b c
+    a = atoi(argv[2]);//a
+    b = atoi(argv[3]);//b
+    c = atoi(argv[4]);//c
+    d = (a*a+b*b);
+    if(c*c!=d) {
+      perror("Invalide parameter!");
+      exit(0);
+    }
+  }
+  
+  assert(a*a+b*b==c*c); //pythagore triple
+  //Rotation2D t(M_PI/2.0);
+  //Rotation2D t(24,7,25);
+  Rotation2D t(a,b,c);
+  
+  std::vector<Z2i::Point> X = readImage(image_name);
   assert(X.size()!=0);
   std::cout<<"X.size="<<X.size()<<std::endl;
   
-  //Rotation2D t(M_PI/2.0);
-  //Rotation2D t(24,7,25);
-  Rotation2D t(3,4,5);
   Z2i::Point p;
   RationalPoint tp;
   cout<<t<<endl;
