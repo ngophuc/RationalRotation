@@ -41,8 +41,8 @@ int main(int argc, const char **argv) {
     image_name = argv[1];
   
   if(argc==3) { //Rotation2D a b c
-    angle = strtod(argv[2]);
-    PythagoreanTriple pt = convertAngle2Pythagore(angle,NULL);
+    angle = strtod(argv[2],NULL);
+    PythagoreanTriple pt = convertAngle2Pythagore(angle);
     a = std::get<0>(pt);
     b = std::get<1>(pt);
     c = std::get<2>(pt);
