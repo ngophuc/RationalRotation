@@ -1,6 +1,8 @@
 #include "Functions.h"
 #include "Rotation2D.h"
 
+#include <stdlib.h>
+#include <stdio.h>
 #include "DGtal/helpers/StdDefs.h"
 #include "DGtal/io/readers/PGMReader.h"
 #include "DGtal/images/ImageSelector.h"
