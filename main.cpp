@@ -69,7 +69,7 @@ int main(int argc, const char **argv) {
       exit(0);
     }
   }
-  printf("filename= %s and Pythagorean triple is %d %d %d", filename, a, b, c);
+  printf("filename= %s and Pythagorean triple is %d %d %d", image_name, a, b, c);
   
   assert(a*a+b*b==c*c); //pythagore triple
   //Rotation2D t(M_PI/2.0);
