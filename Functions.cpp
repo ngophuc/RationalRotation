@@ -345,7 +345,6 @@ void writePoints(std::vector<Z2i::Point> pts, std::string filename)
     for(auto it=pts.begin(); it!=pts.end(); it++)
         myfile << (*it)[0]<<" "<<(*it)[1]<<"\n";
     myfile.close();
-    return 0;
 }
 
 std::ostream& operator<<(std::ostream& os, const RationalPoint p)
