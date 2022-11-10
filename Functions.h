@@ -65,7 +65,7 @@ bool containElement(const std::vector<int>& vector, int element);
 bool containElement(const std::vector<RationalPoint>& vector, RationalPoint element);
 bool containElement(const std::vector<Z2i::Point>& vector, Z2i::Point element);
 
-PythagoreanTriple convertAngle2Pythagore(double B, double e);
+PythagoreanTriple convertAngle2Pythagore(double B, double e=1e-6);
 
 void writePoints(std::vector<Z2i::Point> pts, std::string filename);
 
