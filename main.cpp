@@ -42,11 +42,11 @@ int main(int argc, const char **argv) {
   
   if(argc==3) { //Rotation2D a b c
     angle = strtod(argv[2],NULL);
-
-    PythagoreanTriple pt = convertAngle2Pythagore(angle*M_PI/180.0);
+    PythagoreanTriple pt = convertAngle2Pythagore(angle*M_PI/180.0,1e-9);
     a = std::get<0>(pt);
     b = std::get<1>(pt);
     c = std::get<2>(pt);
+    printf("angle = %f (rad) and with pythagore %f\n", angle*M_PI/180.0, acos(1.0*b/c));
   }
   
   if(argc==4) { //Rotation2D a b
