@@ -15,7 +15,7 @@ make -j 5
 ```    
 # Running command
 ```sh
-./Rotation2D <input_image> [[a b] c]
+./Rotation2D <input_image> [[a b] c | angle (degree)]
 ```
 # Example of valid commands
 ```sh
