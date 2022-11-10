@@ -33,7 +33,7 @@ std::vector<Z2i::Point> readImage(string filename)
 }
 
 int main(int argc, const char **argv) {
-  printf("Running command: <input_image> [[a b] c | angle]\n");
+  printf("Running command: <input_image> [[a b] c | angle (degree)]\n");
   int a=3, b=4, c=5, d;
   double angle = 0;
   string image_name = "../ball_r5.pgm";
@@ -42,7 +42,8 @@ int main(int argc, const char **argv) {
   
   if(argc==3) { //Rotation2D a b c
     angle = strtod(argv[2],NULL);
-    PythagoreanTriple pt = convertAngle2Pythagore(angle);
+
+    PythagoreanTriple pt = convertAngle2Pythagore(angle*M_PI/180.0);
     a = std::get<0>(pt);
     b = std::get<1>(pt);
     c = std::get<2>(pt);
@@ -68,7 +69,7 @@ int main(int argc, const char **argv) {
       exit(0);
     }
   }
-  
+  printf("filename= %s and Pythagorean triple is %d %d %d", filename, a, b, c);
   
   assert(a*a+b*b==c*c); //pythagore triple
   //Rotation2D t(M_PI/2.0);
