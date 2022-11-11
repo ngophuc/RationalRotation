@@ -1,7 +1,6 @@
 # RationalRotation
 
-This code aims at performing a rational rotation on 2D digital image given the rotation as a Pythagorean triplet (a, b, c) 
-such that a^2 + b^2 = c^2.
+This code aims at performing a rational rotation on 2D /3D digital image 
 
 # Dependencies
 - DGtal (https://dgtal.org/)
