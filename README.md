@@ -14,7 +14,7 @@ make -j 5
 ```    
 # Running command
 ```sh
-RationalRotation -h
+./RationalRotation -h
 
 Apply 2D/3D rational rotation on a given image.
  Typical use example:
