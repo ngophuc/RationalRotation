@@ -17,57 +17,69 @@
 
 #include "DGtal/base/BasicTypes.h"
 #include "DGtal/base/Common.h"
-#include "DGtal/io/Color.h"
-#include "DGtal/io/boards/Board2D.h"
 #include "DGtal/helpers/StdDefs.h"
 
 using namespace DGtal;
+
+template<typename T1, typename T2, typename T3>
+struct triplet
+{
+    T1 first;
+    T2 middle;
+    T3 last;
+};
+
+template<typename T1, typename T2, typename T3>
+triplet<T1,T2,T3> make_triplet(const T1 &m1, const T2 &m2, const T3 &m3)
+{
+    triplet<T1,T2,T3> ans;
+    ans.first = m1;
+    ans.middle = m2;
+    ans.last = m3;
+    return ans;
+}
 
 // a/b
 typedef mpq_class Rational;
 // x,y
 typedef std::pair<Rational,Rational> RationalPoint;
-//ax + by + c = 0
-typedef std::tuple<Rational,Rational,Rational> Line;
-//(a,b,c) => a*a+b*bb=c*c, sin = a/c, cos = b/c
-typedef std::tuple<int,int,int> PythagoreanTriple;
+// x,y,z
+typedef triplet<Rational,Rational,Rational> RationalPoint3D;
 
-std::ostream& operator<<(std::ostream& os, const RationalPoint p);
+//(a,b,c) => a*a+b*bb=c*c, sin = a/c, cos = b/c
+typedef std::tuple<int,int,int> PythagoreanTriplet;
 
 double getRealValue(Rational rp);
 Rational min(Rational r1, Rational r2);
 Rational max(Rational r1, Rational r2);
 
+//Functions for 2D
+std::ostream& operator<<(std::ostream& os, const RationalPoint p);
+
 RationalPoint getBaryCenter(std::vector<RationalPoint> vP);
 Z2i::RealPoint getBaryCenter(std::vector<Z2i::Point> vP);
 
+PythagoreanTriplet convertAngle2Pythagore(double B, double e);
+
 bool isEqual(RationalPoint p1, RationalPoint p2);
-bool isSameVector(const std::vector<int>& v1, const std::vector<int>& v2);
-bool isSameVector(const std::vector<Rational>& v1, const std::vector<Rational>& v2);
-bool isSameVector(const std::vector<RationalPoint>& v1, const std::vector<RationalPoint>& v2);
-std::vector<int> permuteCircularVector(const std::vector<int>& v, int k);
-bool isSameCircularVector(const std::vector<int>& v1, const std::vector<int>& v2);
-std::vector<RationalPoint> permuteCircularVector(const std::vector<RationalPoint>& v, int k);
-bool isSameCircularVector(const std::vector<RationalPoint>& v1, const std::vector<RationalPoint>& v2);
 
 double distance(RationalPoint p1, RationalPoint p2);
 double distance(Z2i::Point p1, Z2i::Point p2);
 double distance(Z2i::RealPoint p1, Z2i::RealPoint p2);
 
-bool isAllTrue(std::vector<bool> vec);
-bool isAllFalse(std::vector<bool> vec);
-int getFirstTrue(std::vector<bool> vec);
-int getFirstFalse(std::vector<bool> vec);
-
-int findVertex(const std::vector<RationalPoint>& vector, RationalPoint v);
-int findVertex(const std::vector<Z2i::Point>& vector, Z2i::Point v);
-bool containElement(const std::vector<int>& vector, int element);
-bool containElement(const std::vector<RationalPoint>& vector, RationalPoint element);
-bool containElement(const std::vector<Z2i::Point>& vector, Z2i::Point element);
-
-PythagoreanTriple convertAngle2Pythagore(double B, double e=1e-6);
-
 void writePoints(std::vector<Z2i::Point> pts, std::string filename);
+
+//Functions for 3D
+std::ostream& operator<<(std::ostream& os, const RationalPoint3D p);
+
+RationalPoint3D getBaryCenter(std::vector<RationalPoint3D> vP);
+Z3i::RealPoint getBaryCenter(std::vector<Z3i::Point> vP);
+
+bool isEqual(RationalPoint3D p1, RationalPoint3D p2);
+
+double distance(RationalPoint3D p1, RationalPoint3D p2);
+double distance(Z3i::Point p1, Z3i::Point p2);
+double distance(Z3i::RealPoint p1, Z3i::RealPoint p2);
 
 //#include "Functions.ih" // Includes inline functions.
 #endif // FUNCTIONS_H

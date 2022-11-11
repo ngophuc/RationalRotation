@@ -18,5 +18,5 @@ LINK_DIRECTORIES(${GMP_LIBRARY_DIRS})
 add_definitions(-g)
 
 #add_executable(${PROJECT_NAME} ${SRC_LIST})
-add_executable(${PROJECT_NAME} main.cpp Functions.h Functions.cpp Rotation2D.h Rotation2D.cpp)
+add_executable(${PROJECT_NAME} main.cpp CLI11.hpp Functions.h Functions.cpp Rotation2D.h Rotation2D.cpp Rotation3D.h Rotation3D.cpp)
 target_link_libraries(${PROJECT_NAME} ${DGTAL_LIBRARIES} ${DGtalToolsLibDependencies} gmp gmpxx)

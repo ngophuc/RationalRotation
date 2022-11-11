@@ -17,7 +17,7 @@ Rotation2D::Rotation2D (int a, int b, int c)
 
 Rotation2D::Rotation2D (double angle, double error)
 {
-    PythagoreanTriple pt = convertAngle2Pythagore(angle,error);
+    PythagoreanTriplet pt = convertAngle2Pythagore(angle,error);
     int a = std::get<0>(pt);
     int b = std::get<1>(pt);
     int c = std::get<2>(pt);
@@ -29,7 +29,7 @@ Rotation2D::Rotation2D (double angle, double error)
 
 Rotation2D Rotation2D::setAngle(double angle, double error)
 {
-    PythagoreanTriple pt = convertAngle2Pythagore(angle,error);
+    PythagoreanTriplet pt = convertAngle2Pythagore(angle,error);
     int a = std::get<0>(pt);
     int b = std::get<1>(pt);
     int c = std::get<2>(pt);
@@ -66,5 +66,6 @@ std::ostream& operator<<(std::ostream& os, const Rotation2D& t)
 {
     os << "Print Rotation2D "<<std::endl;
     os << "Rotation: sin=" <<t.sin <<", cos=" <<t.cos<<std::endl;
+    os << "Rotation angle=" <<asin(getRealValue(t.sin))<<std::endl;
     return os;
 }
