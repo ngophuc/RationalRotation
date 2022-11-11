@@ -53,7 +53,7 @@ std::vector<Z3i::Point> readImage3D(string filename)
   Image image = VolReader<Image>::importVol(filename);
   for ( Z3i::Domain::ConstIterator it = image.domain().begin(); it != image.domain().end(); ++it ) {
     Z3i::Point p = (*it);
-    if(image(p)==255) {
+    if(image(p)>0) {
       vecPtsTmp.push_back(*it);
     }
   }
@@ -83,7 +83,7 @@ int main(int argc, char** argv)
     
   app.add_option("-i,--input,1",filename,"Input file.")->required()->check(CLI::ExistingFile);
   app.add_option("-d,--dim",dim,"Dimension: 2 or 3 (default 2)",true);
-  auto angle_opt = app.add_option("-a,--angle",angle,"Rotation angle in radians (default 0)",true);
+  auto angle_opt = app.add_option("-a,--angle",angle,"Rotation angle in degrees (default 0)",true);
   
   auto pa_opt = app.add_option("--pa",a,"Pythagorean triplet for 2D rotation (default 3)",true);
   auto pb_opt = app.add_option("--pb",b,"Pythagorean triplet for 2D rotation (default 4)",true);
@@ -111,8 +111,9 @@ int main(int argc, char** argv)
     Rotation3D rot;
     //Initisation the rotation with an angle and an axis
     if (angle_opt->count() > 0 && ax_opt->count() > 0 && ax_opt->count() > 0 && ax_opt->count() > 0) {
-      rot = Rotation3D(angle, ax, ay, az);
-      cout<<"angle(input)="<<angle<<" vs angle(quaterion)"<<acos(2*cos(1.0*a))<<endl;
+      double rot_angle = angle*M_PI/180.0;
+      rot = Rotation3D(rot_angle, ax, ay, az);
+      cout<<"angle(input)="<<rot_angle<<"(rad) vs angle(quaterion)="<<acos(2*cos(1.0*a))<<endl;
     }
     //Initisation the rotation with a quaternion
     else if (qa_opt->count() > 0 && qb_opt->count() > 0 && qc_opt->count() > 0 && qd_opt->count() > 0) {
@@ -139,8 +140,9 @@ int main(int argc, char** argv)
     Rotation2D rot;
     //Initisation the rotation with an angle
     if (angle_opt->count() > 0) {
-      rot = Rotation2D(angle);
-      cout<<"angle(input)="<<angle<<" vs angle(pythagore)"<<asin(getRealValue(rot.sin))<<endl;
+      double rot_angle = angle*M_PI/180.0;
+      rot = Rotation2D(rot_angle);
+      cout<<"angle(input)="<<rot_angle<<"(rad) vs angle(pythagore)="<<asin(getRealValue(rot.sin))<<endl;
     }
     //Initisation the rotation with a Pythagorean triplet
     else if (pa_opt->count() > 0 && pb_opt->count() > 0 && pc_opt->count() > 0) {

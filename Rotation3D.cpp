@@ -6,7 +6,6 @@ Rotation3D::Rotation3D (int a_, int b_, int c_, int d_)
   b=Rational(b_,1);
   c=Rational(c_,1);
   d=Rational(d_,1);
-  return *this;
 }
 
 Rotation3D::Rotation3D (double angle, int ax, int ay, int az, double error)
@@ -20,7 +19,6 @@ Rotation3D::Rotation3D (double angle, int ax, int ay, int az, double error)
   b=Rational(xp);
   c=Rational(yp);
   d=Rational(zp);
-  return *this;
   
 }
 
