@@ -32,7 +32,7 @@ Options:
   -h,--help                             Print this help message and exit
   -i,--input TEXT:FILE REQUIRED         Input file.
   -d,--dim INT=2                        Dimension: 2 or 3 (default 2)
-  -a,--angle FLOAT=0                    Rotation angle in radians (default 0)
+  -a,--angle FLOAT=0                    Rotation angle in degrees (default 0)
   --pa INT=3                            Pythagorean triplet for 2D rotation (default 3)
   --pb INT=4                            Pythagorean triplet for 2D rotation (default 4)
   --pc INT=5                            Pythagorean triplet for 2D rotation (default 5)
