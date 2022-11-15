@@ -16,7 +16,7 @@ class Rotation3D
     Rotation3D (double angle, int ax, int ay, int az, double error=1e-6); //approximate angle by pythagorean triangle
     friend std::ostream& operator<<(std::ostream& os, const Rotation3D& t);
     
-    Rotation3D getAngle();
+    double getAngle();
     
     RationalPoint3D transform(RationalPoint3D p);
     RationalPoint3D transform(Z3i::Point p);

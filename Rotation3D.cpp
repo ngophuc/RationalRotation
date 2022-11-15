@@ -10,7 +10,7 @@ Rotation3D::Rotation3D (int a_, int b_, int c_, int d_)
 
 Rotation3D::Rotation3D (double angle, int ax, int ay, int az, double error)
 {
-  PythagoreanTriplet pt=convertAngle2Pythagore(angle, error);
+  PythagoreanTriplet pt=convertAngle2Pythagore(angle/2.0, error);
   int pa = std::get<0>(pt);
   int pb = std::get<1>(pt);
   int pc = std::get<2>(pt);
@@ -30,8 +30,6 @@ double Rotation3D::getAngle() {
   double b_ = getRealValue(b);
   double c_ = getRealValue(c);
   double d_ = getRealValue(d);
-  std::cout<<"a="<<a_<<" b="<<b_<<" c="<<c_<<" d="<<d_<<std::endl;
-  std::cout<<"a="<<a_<<" and norme="<<sqrt(a_*a_+b_*b_+c_*c_+d_*d_)<<std::endl;
   double tmp = a_/sqrt(a_*a_+b_*b_+c_*c_+d_*d_);
   return 2*acos(tmp);
 }
