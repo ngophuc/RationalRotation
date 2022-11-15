@@ -12,6 +12,7 @@ Rotation3D::Rotation3D (double angle, int ax, int ay, int az, double error)
 {
   //TODO: Coversion to quaternion here
   a=Rational(cos(angle/2.0));
+  /*
   double n = sqrt(ax*ax+ay*ay+az*az);
   double xp = 1.0*ax/n;
   double yp = 1.0*ay/n;
@@ -19,6 +20,10 @@ Rotation3D::Rotation3D (double angle, int ax, int ay, int az, double error)
   b=Rational(xp);
   c=Rational(yp);
   d=Rational(zp);
+  */
+  b=Rational(ax,1);
+  c=Rational(ay,1);
+  d=Rational(az,1);
   
 }
 
@@ -30,16 +35,6 @@ Rotation3D Rotation3D::setAngle(double angle, double error)
 
 Rotation3D Rotation3D::setAxis(int ax, int ay, int az)
 {
-  /*
-  //TODO: Coversion to quaternion here
-  double n = sqrt(ax*ax+ay*ay+az*az);
-  double xp = 1.0*ax/n;
-  double yp = 1.0*ay/n;
-  double zp = 1.0*az/n;
-  b=Rational(xp);
-  c=Rational(yp);
-  d=Rational(zp);
-  */
   b=Rational(ax,1);
   c=Rational(ay,1);
   d=Rational(az,1);
