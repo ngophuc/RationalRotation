@@ -10,35 +10,30 @@ Rotation3D::Rotation3D (int a_, int b_, int c_, int d_)
 
 Rotation3D::Rotation3D (double angle, int ax, int ay, int az, double error)
 {
-  //TODO: Coversion to quaternion here
-  a=Rational(cos(angle/2.0));
-  /*
-  double n = sqrt(ax*ax+ay*ay+az*az);
-  double xp = 1.0*ax/n;
-  double yp = 1.0*ay/n;
-  double zp = 1.0*az/n;
-  b=Rational(xp);
-  c=Rational(yp);
-  d=Rational(zp);
-  */
-  b=Rational(ax,1);
-  c=Rational(ay,1);
-  d=Rational(az,1);
-  
+  PythagoreanTriplet pt=convertAngle2Pythagore(angle, error);
+  int pa = std::get<0>(pt);
+  int pb = std::get<1>(pt);
+  int pc = std::get<2>(pt);
+  //this->sin = Rational(pa,pc); //tan = pa/pb
+  //this->cos = Rational(pb,pc); //cotan = pb/pa
+  double n = pa/error;
+  //std::cout<<"a="<<round(pb*sqrt(ax*ax+ay*ay+az*az)/error)<<" b="<<n*ax<<" c="<<n*ay<<" d="<<n*az<<std::endl;
+  a = Rational(round(pb*sqrt(ax*ax+ay*ay+az*az)/error));
+  b = Rational(n*ax); 
+  c = Rational(n*ay); 
+  d = Rational(n*az);
+  std::cout<<"a="<<a<<" b="<<b<<" c="<<c<<" d="<<d<<std::endl;
 }
 
-Rotation3D Rotation3D::setAngle(double angle, double error)
-{
-  a=Rational(cos(angle/2.0));//TODO: Coversion to quaternion here
-  return *this;
-}
-
-Rotation3D Rotation3D::setAxis(int ax, int ay, int az)
-{
-  b=Rational(ax,1);
-  c=Rational(ay,1);
-  d=Rational(az,1);
-  return *this;
+double Rotation3D::getAngle() {
+  double a_ = getRealValue(a);
+  double b_ = getRealValue(b);
+  double c_ = getRealValue(c);
+  double d_ = getRealValue(d);
+  std::cout<<"a="<<a_<<" b="<<b_<<" c="<<c_<<" d="<<d_<<std::endl;
+  std::cout<<"a="<<a_<<" and norme="<<sqrt(a_*a_+b_*b_+c_*c_+d_*d_)<<std::endl;
+  double tmp = a_/sqrt(a_*a_+b_*b_+c_*c_+d_*d_);
+  return 2*acos(tmp);
 }
 
 RationalPoint3D Rotation3D::transform(RationalPoint3D p)

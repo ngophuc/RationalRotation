@@ -112,8 +112,7 @@ int main(int argc, char** argv)
     //Initisation the rotation with an angle and an axis
     if (angle_opt->count() > 0 && ax_opt->count() > 0 && ax_opt->count() > 0 && ax_opt->count() > 0) {
       double rot_angle = angle*M_PI/180.0;
-      rot = Rotation3D(rot_angle, ax, ay, az);
-      cout<<"angle(input)="<<rot_angle<<"(rad) vs angle(quaterion)="<<acos(2*cos(1.0*a))<<endl;
+      cout<<"angle(input)="<<rot_angle<<"(rad) vs angle(quaterion)="<<rot.getAngle()<<endl;
     }
     //Initisation the rotation with a quaternion
     else if (qa_opt->count() > 0 && qb_opt->count() > 0 && qc_opt->count() > 0 && qd_opt->count() > 0) {
