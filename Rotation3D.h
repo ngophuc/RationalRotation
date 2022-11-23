@@ -20,7 +20,6 @@ class Rotation3D
     
     RationalPoint3D transform(RationalPoint3D p);
     RationalPoint3D transform(Z3i::Point p);
-    //Line transform(Line l);
 };
 
 RationalPoint3D transformPoint(RationalPoint3D p, Rotation3D t);

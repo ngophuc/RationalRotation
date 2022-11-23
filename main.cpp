@@ -78,12 +78,14 @@ int main(int argc, char** argv)
   int qa=0, qb=1, qc=0, qd=0;
   double angle=0.0;
   int ax=1, ay=0, az=0;
-  
+  double precision = 1e-6;
+
   app.description("Apply 2D/3D rational rotation on a given image.\n Typical use example:\n \t RationalRotation --input <filename> --dim [2 3] --ox 1.0 --oy 1.0 --oz 1 -a 1.2 --ax 1 --ay 1 --az 0 --tx 1 --ty 0 --tz 0 \n Example:\n RationalRotation -d 2 -i ../ball_r5.pgm --pa 3 --pb 4 --pc 5 \n RationalRotation -d 3 -i Al.100.vol --qa 3 --qb 4 --qc 5 --qd 5\n");
     
   app.add_option("-i,--input,1",filename,"Input file.")->required()->check(CLI::ExistingFile);
   app.add_option("-d,--dim",dim,"Dimension: 2 or 3 (default 2)",true);
   auto angle_opt = app.add_option("-a,--angle",angle,"Rotation angle in degrees (default 0)",true);
+  auto precision_opt = app.add_option("-p,--precision",precision,"Precision approximation (default 1e-6)",true);
   
   auto pa_opt = app.add_option("--pa",a,"Pythagorean triplet for 2D rotation (default 3)",true);
   auto pb_opt = app.add_option("--pb",b,"Pythagorean triplet for 2D rotation (default 4)",true);
@@ -112,7 +114,7 @@ int main(int argc, char** argv)
     //Initisation the rotation with an angle and an axis
     if (angle_opt->count() > 0 && ax_opt->count() > 0 && ax_opt->count() > 0 && ax_opt->count() > 0) {
       double rot_angle = angle*M_PI/180.0;
-      rot = Rotation3D(rot_angle, ax, ay, az);
+      rot = Rotation3D(rot_angle, ax, ay, az, precision);
       cout<<"angle(input)="<<rot_angle<<"(rad) vs angle(quaterion)="<<rot.getAngle()<<endl;
     }
     //Initisation the rotation with a quaternion
@@ -120,7 +122,7 @@ int main(int argc, char** argv)
       rot = Rotation3D(qa, qb, qc, qd);
     }
     cout<<rot<<endl;
-    return 1;
+    
     //Realisation of the rational rotation
     Z3i::Point p;
     RationalPoint3D tp;
@@ -141,7 +143,7 @@ int main(int argc, char** argv)
     //Initisation the rotation with an angle
     if (angle_opt->count() > 0) {
       double rot_angle = angle*M_PI/180.0;
-      rot = Rotation2D(rot_angle);
+      rot = Rotation2D(rot_angle, precision);
       cout<<"angle(input)="<<rot_angle<<"(rad) vs angle(pythagore)="<<asin(getRealValue(rot.sin))<<endl;
     }
     //Initisation the rotation with a Pythagorean triplet
